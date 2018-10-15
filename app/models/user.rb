@@ -17,4 +17,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  after_create :make_profile
+
+  private
+
+  def make_profile
+
+  end
 end

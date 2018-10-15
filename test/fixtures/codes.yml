@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: codes
+#
+#  id         :bigint(8)        not null, primary key
+#  code       :string
+#  valid      :boolean
+#  user_id    :bigint(8)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  valid: 2018-10-14 22:21:56
+  valid: false
+  user: one
+
+two:
+  code: MyString
+  valid: 2018-10-14 22:21:56
+  valid: false
+  user: two
