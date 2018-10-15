@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   get 'root/index'
 
   get 'otp/enable'
-  get 'otp/validate'
+  post 'otp/validate'
   get 'otp/disable'
+  get 'otp/generate'
+
   get 'otp/status'
   resources :profiles
   resources :codes

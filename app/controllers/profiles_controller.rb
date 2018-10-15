@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: %i[show edit update destroy]
 
   # GET /profiles
   # GET /profiles.json
@@ -9,8 +11,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1
   # GET /profiles/1.json
-  def show
-  end
+  def show; end
 
   # GET /profiles/new
   def new
@@ -18,8 +19,7 @@ class ProfilesController < ApplicationController
   end
 
   # GET /profiles/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /profiles
   # POST /profiles.json
@@ -40,14 +40,11 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
-    respond_to do |format|
-      if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
-        format.json { render :show, status: :ok, location: @profile }
-      else
-        format.html { render :edit }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
-      end
+    if @profile.update(profile_params)
+      @profile.update(otp: false)
+      redirect_to otp_status_path, notice: 'Profile was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -62,13 +59,14 @@ class ProfilesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile
-      @profile = Profile.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def profile_params
-      params.require(:profile).permit(:phone, :otp, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_profile
+    @profile = Profile.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def profile_params
+    params.require(:profile).permit(:phone, :otp, :user_id)
+  end
 end

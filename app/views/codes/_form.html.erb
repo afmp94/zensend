@@ -1,37 +1,34 @@
-<%= form_with(model: code, local: true) do |form| %>
-  <% if code.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(code.errors.count, "error") %> prohibited this code from being saved:</h2>
-
-      <ul>
-      <% code.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for @code, html: { class: 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :code, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :code, class: 'text_field form-control' %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
+  </div>
+  <div class="form-group">
+    <%= f.label :valid, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :valid, class: 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :used, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :used, class: 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :user_id, class: 'text_field form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :valid %>
-    <%= form.datetime_select :valid %>
-  </div>
-
-  <div class="field">
-    <%= form.label :valid %>
-    <%= form.check_box :valid %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+                  codes_path, class: 'btn btn-default' %>
+    </div>
   </div>
 <% end %>

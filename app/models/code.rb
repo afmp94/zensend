@@ -22,7 +22,7 @@ class Code < ApplicationRecord
   end
 
   def still_valid
-    valid > Time.now
+    validtime > Time.now
   end
 
   def self.from_user(user)

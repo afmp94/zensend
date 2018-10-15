@@ -1,14 +1,14 @@
 class RandomGenerator
-  def self.only_alphabet(length)
+  def only_alphabet(length)
     random_string(length, alphabet)
   end
 
-  def self.letters_and_numbers(length)
+  def letters_and_numbers(length)
     random_string(length, alphabet + numbers)
   end
 
-  def self.only_numbers(length)
-    random_string(length,  numbers)
+  def only_numbers(length)
+    random_string(length, numbers)
   end
 
   private

@@ -23,7 +23,7 @@ class Profile < ApplicationRecord
   def enable_otp
     transaction do
       code, valid = OTP::sendOTP(self.phone)
-      Code.create(user: self.user, code: code, valid: valid)
+      Code.create(user: self.user, code: code, validtime: valid)
     end
   end
 end

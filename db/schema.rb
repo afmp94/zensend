@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2018_10_15_032312) do
 
   create_table "codes", force: :cascade do |t|
     t.string "code"
-    t.datetime "valid"
+    t.datetime "validtime"
     t.boolean "used"
     t.bigint "user_id"
     t.datetime "created_at", null: false

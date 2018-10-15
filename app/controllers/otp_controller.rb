@@ -1,44 +1,48 @@
+# frozen_string_literal: true
+
 class OtpController < ApplicationController
   before_action :get_code, only: [:validate]
-  before_action :current_user_codes, only: [:generate, :validate]
+  before_action :current_user_codes, only: %i[generate validate]
 
   # one user can generate up to 5 codes in 5 minutes. current scenario
 
   def generate
     exceed = @current_user_codes.exceed_last_minutes.count >= OTP::VALID_CODES
-    render :enable, notice: 'you exceed the quota. please try again with the codes previously generated.' if exceed
-    current_user.enable_otp
-  end
+    if exceed
+      redirect_to otp_enable_path, notice: 'you exceed the quota. please try again with the codes previously generated.'
+    else
+      current_user.enable_otp
+      redirect_to otp_enable_path, notice: 'code generated.'
+    end
+ end
 
- #form for fill the code and see if this is correct or not
-  def enable
-  end
+  # form for fill the code and see if this is correct or not
+  def enable; end
 
   # new
   def validate
     # The current implementation does not validate how many attempts
     # the user validates a code
     code = @current_user_codes.find_by_code(@code)
-    case code
-    when code.nil?
-      render :enable, notice: 'this code is not valid. please try again.'
-    when !code.still_valid?
+    if code.nil?
+      redirect_to otp_enable_path, notice: 'this code is not valid. please try again.'
+    elsif code.still_valid
       code.validate
-      render :enable, notice: 'this code is not valid anymore. please try again'
-    when code.still_valid?
-      code.validate
-      current_user.update(otp: true)
-      render :status, notice: 'this code is valid. 2fa enabled successfully.'
+      current_user.profile.update(otp: true)
+      redirect_to otp_status_path, notice: 'this code is valid. 2fa enabled successfully.'
     else
-      render :enable, notice: 'Please try again.'
+      code.validate
+      redirect_to otp_enable_path, notice: 'this code is not valid anymore. please try again'
     end
   end
 
   def disable
-    current_user.update(otp: false)
+    current_user.profile.update(otp: false)
+    redirect_to otp_status_path, notice: '2fa disabled'
   end
 
   def status
+    @profile = current_user.profile
     @status = current_user.otp
   end
 

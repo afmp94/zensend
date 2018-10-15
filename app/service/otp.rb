@@ -10,11 +10,11 @@ class OTP
   VALID_CODES = 5
 
   def self.random
-    RandomGenerator.only_numbers(LENGTH_RANDOM)
+    RandomGenerator.new.only_numbers(LENGTH_RANDOM)
   end
 
   def self.sendOTP(number)
-    SMS.send_sms(random, [number])
+    SMS.new.send_sms(OTP::random, [number])
     [random, Time.now + TIME_VALID.minutes]
   end
 end

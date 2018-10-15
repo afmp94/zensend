@@ -1,24 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Code -%>
+<div class="page-header">
+  <h1><%=t '.title', default: model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Code:</strong>
-  <%= @code.code %>
-</p>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:code) %></dt>
+      <dd><pre class="prettyprint"><%= @code.code %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:valid) %></dt>
+      <dd><pre class="prettyprint"><%= @code.valid %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:used) %></dt>
+      <dd><pre class="prettyprint"><%= @code.used %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:user_id) %></dt>
+      <dd><pre class="prettyprint"><%= @code.user_id %></pre></dd>
+  </dl>
+</div>
 
-<p>
-  <strong>Valid:</strong>
-  <%= @code.valid %>
-</p>
-
-<p>
-  <strong>Valid:</strong>
-  <%= @code.valid %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @code.user %>
-</p>
-
-<%= link_to 'Edit', edit_code_path(@code) %> |
-<%= link_to 'Back', codes_path %>
+<div class="form-group">
+  <%= link_to t('.back', default: t("helpers.links.back")),
+              codes_path, class: 'btn btn-default'  %>
+  <%= link_to t('.edit', default: t("helpers.links.edit")),
+              edit_code_path(@code), class: 'btn btn-default' %>
+  <%= link_to t('.destroy', default: t("helpers.links.destroy")),
+              code_path(@code),
+              method: 'delete',
+              data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) },
+              class: 'btn btn-danger' %>
+</div>
