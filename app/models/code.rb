@@ -18,6 +18,20 @@ class Code < ApplicationRecord
 
   def validate
     update(used: true)
+  end
+
+  def still_valid
     valid > Time.now
+  end
+
+  def self.from_user(user)
+    where(user: user)
+  end
+
+  def self.exceed_last_minutes
+    start_time_window = Time.now - OTP::TIME_VALID.minutes
+    end_time_window = Time.now
+    time_window = [start_time_window..end_time_window]
+    where(created_at: time_window)
   end
 end

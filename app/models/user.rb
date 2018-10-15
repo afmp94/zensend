@@ -23,8 +23,9 @@ class User < ApplicationRecord
   after_create :create_profile
 
   has_one :profile, dependent: :destroy
+  has_many :codes, dependent: :destroy
 
-  delegate :phone, :otp, to: :profile
+  delegate :enable_otp, :phone, :otp, to: :profile
 
   private
 
