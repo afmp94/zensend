@@ -30,8 +30,10 @@ class User < ApplicationRecord
   private
 
   def create_profile
-    # also can be set the values by default,
+    # also can be set the values by default, in the migration
     # depends the business logic
     Profile.create(user: self, phone: '', otp: false)
+    # or
+    # self.profile.create(phone: '', otp:false)
   end
 end

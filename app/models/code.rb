@@ -14,6 +14,7 @@
 #
 
 class Code < ApplicationRecord
+  # this classes can be also developed inside a module. depends business logic
   belongs_to :user
 
   def validate
