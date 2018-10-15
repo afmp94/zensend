@@ -24,6 +24,8 @@ gem 'slim'
 
 gem 'annotate'
 
+gem 'bootstrap-sass-extras'
+
 gem 'phonelib'
 
 # Use CoffeeScript for .coffee assets and views
