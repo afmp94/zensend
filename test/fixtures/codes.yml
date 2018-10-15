@@ -4,7 +4,8 @@
 #
 #  id         :bigint(8)        not null, primary key
 #  code       :string
-#  valid      :boolean
+#  valid      :datetime
+#  used       :boolean
 #  user_id    :bigint(8)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

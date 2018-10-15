@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -18,11 +20,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  after_create :make_profile
+  after_create :create_profile
+
+  has_one :profile, dependent: :destroy
+
+  delegate :phone, :otp, to: :profile
 
   private
 
-  def make_profile
-
+  def create_profile
+    # also can be set the values by default,
+    # depends the business logic
+    Profile.create(user: self, phone: '', otp: false)
   end
 end

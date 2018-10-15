@@ -12,4 +12,14 @@
 
 class Profile < ApplicationRecord
   belongs_to :user
+
+  def otp_enabled?
+    self.otp
+  end
+
+  def enable_otp
+    transaction do
+      
+    end
+  end
 end
