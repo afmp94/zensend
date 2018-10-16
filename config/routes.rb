@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   root 'root#index'
   get 'root/index'
 
+  get 'otp/login'
+  post 'otp/login_validate'
+  get 'otp/login_generate'
+
+
   get 'otp/enable'
   post 'otp/validate'
   get 'otp/disable'

@@ -2,6 +2,7 @@
 
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[show edit update destroy]
+  before_action :verify_session
 
   # GET /profiles
   # GET /profiles.json
@@ -69,4 +70,13 @@ class ProfilesController < ApplicationController
   def profile_params
     params.require(:profile).permit(:phone, :otp, :user_id)
   end
+
+  def verify_session
+    if current_user&.otp
+      unless current_user.validate_otp_login
+        redirect_to otp_login_path, notice: 'Please validate One Time Password.'
+      end
+    end
+  end
+
 end

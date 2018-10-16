@@ -1,19 +1,24 @@
-h1 Status of the 2fa || OTP
-
--if  @status
-  h3 The 2fa is enabled
-  -if @profile.phone.blank?
-    = link_to 'click here to add phone', edit_profile_path(@profile)
-  -else
-    = link_to 'click here to modify phone', edit_profile_path(@profile)
-    br
-    = link_to 'click here to disable it',otp_disable_path
--else
-  h3 The 2fa is disabled
-  -if @profile.phone.blank?
-    h4 you have not phone in your profile
-    = link_to 'click here to add phone', edit_profile_path(@profile)
-  -else
-    = link_to 'click here to modify phone', edit_profile_path(@profile)
-    br
-    = link_to 'click here to enable it', otp_enable_path
+section.jumbotron.text-center
+  .container
+    h1.jumbotron-heading
+      | Zensend App - Security configuration
+    p.lead.text-muted
+      | Please click below to generate a new code for the phone number +#{current_user.phone}
+    p
+      -if  @status
+        h2 The second factor authentication is enabled
+        -if @profile.phone.blank?
+          = link_to 'click here to add phone', edit_profile_path(@profile)
+        -else
+          = link_to 'click here to modify phone', edit_profile_path(@profile)
+          br
+          = link_to 'click here to disable it',otp_disable_path
+      -else
+        h2 The second factor authentication is disabled
+        -if @profile.phone.blank?
+          h4 you have not phone in your profile
+          = link_to 'click here to add phone', edit_profile_path(@profile)
+        -else
+          = link_to 'click here to modify phone', edit_profile_path(@profile)
+          br
+          = link_to 'click here to enable it', otp_enable_path

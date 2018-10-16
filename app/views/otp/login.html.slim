@@ -1,0 +1,13 @@
+section.jumbotron.text-center
+  .container
+    h1.jumbotron-heading
+      | Second factor authentication access Zensend App
+    p.lead.text-muted
+      | Please click below to generate a new code for the phone number +#{current_user.phone}
+    p
+      = link_to 'click here to send a code', otp_login_generate_path
+      = form_tag otp_login_validate_path do
+        p
+          = text_field_tag :code
+          = submit_tag "validate code"
+

@@ -1,12 +1,13 @@
 = form_for @profile, html: {class: 'form-horizontal'} do |f|
   .form-group
-    = f.label :phone, class: 'control-label col-md-2'
-    .col-md-10
+    /= f.label :phone, class: 'control-label col-md-2'
+    .col-md-12
       = f.text_field :phone, class: 'text_field form-control'
       -if current_user.otp
         br
         p Modifying the phone number you will disable the 2fa and you will have to activate it again
   .form-group
-    .col-md-offset-2.col-md-10
+    .col-md-12
       = f.submit nil, class: 'btn btn-primary'
+      br
       = link_to t('.cancel', default: t("helpers.links.cancel")), otp_status_path, class: 'btn btn-default'

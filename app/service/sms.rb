@@ -5,7 +5,6 @@ class SMS
     require 'zensend'
 
     client = ZenSend::Client.new("ZM2zt6_Jj43S_kguE5fz7Q")
-    #  bug https://en.wikipedia.org/wiki/MSISDN MSISDN codes are up to 15
     begin
       result = client.send_sms(
           originator: origin,

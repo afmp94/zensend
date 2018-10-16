@@ -14,7 +14,8 @@ class OTP
   end
 
   def self.sendOTP(number)
-    SMS.new.send_sms(OTP::random, [number])
-    [random, Time.now + TIME_VALID.minutes]
+    code = OTP::random
+    SMS.new.send_sms(code, [number])
+    [code, Time.now + TIME_VALID.minutes]
   end
 end

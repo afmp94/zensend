@@ -1,19 +1,22 @@
-h1 Generate new code for #{current_user.phone}
-br
-h5 in this form you will enable the second factor autentication for the number
-br
-h5 if you want to modify your phone
-br
-=link_to 'click here to change your phone number', profile_path(current_user.profile)
-br
 
+section.jumbotron.text-center
+  .container
+    h1.jumbotron-heading
+      | Zensend App - activate second factor authentication for #{current_user.phone}
+    p
+      = link_to 'Click here to change your phone number', profile_path(current_user.profile)
+    p.lead.text-muted
+      p 1. send a code to your phone
+      p
+        = link_to 'Click here to send a code', otp_generate_path
+      p 2. enter the code in the following form and click on enable second factor authentication
+      p
+        = form_tag otp_validate_path do
+          p
+            = text_field_tag :code
+            = submit_tag "Enable"
 
-h1 enter the sms received
-= form_tag otp_validate_path do
-  p
-    = text_field_tag :code
-    = submit_tag "Activate 2fa"
-
-br
-h5 Generate a new code,
-= link_to 'click here to send a code', otp_generate_path
+section.jumbotron.text-center
+  .container
+    p
+      | Remember that you can generate up to #{OTP::VALID_CODES} codes, in a period of #{OTP::TIME_VALID} Minutes

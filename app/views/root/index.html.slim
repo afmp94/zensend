@@ -1,1 +1,19 @@
-h1 Welcome to the Zensend App
+section.jumbotron.text-center
+  .container
+    h1.jumbotron-heading
+      |  Welcome to the Zensend App
+    p.lead.text-muted
+      - if user_signed_in?
+        = "Welcome #{current_user.email}"
+      -else
+        | Sign in or Sign up to continue
+    p
+      - if user_signed_in?
+        = link_to "Sign out", destroy_user_session_path, class: 'btn btn-primary my-2', :method => :delete
+        br
+        = link_to "Security menu", otp_status_path, class: 'btn btn-primary my-2'
+
+      - else
+        = link_to "Sign in", new_user_session_path, class: 'btn btn-primary my-2'
+        = " "
+        = link_to "Sign up", new_user_registration_path, class: 'btn btn-primary my-2'
